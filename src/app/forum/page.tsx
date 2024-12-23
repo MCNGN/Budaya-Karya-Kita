@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Post from "../components/Post";
 
 const dummyData = [
   {
@@ -40,21 +41,7 @@ export default function Forum() {
           >
             <div className="w-1/3 bg-gray-300"></div>
             <div className="w-2/3 content-center bg-white py-2 pl-10">
-              <div className="w-[420px] h-[120px]">
-                <div className="flex items-center p-1 mb-4">
-                  <div
-                    className="w-[45px] h-[45px] rounded-full 
-                    inline-flex items-center justify-center 
-                    bg-gray-500 text-gray-700 mr-2"
-                  >
-                  </div>
-                  <div className="flex-col">
-                    <div className="flex text-lg">{post.username}</div>
-                    <div className="flex text-base">{post.bio}</div>
-                  </div>
-                </div>
-                {post.caption}
-              </div>
+              <Post username={post.username} bio={post.bio} caption={post.caption} />
             </div>
           </div>
         ))}
