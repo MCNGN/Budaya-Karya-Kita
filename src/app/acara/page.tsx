@@ -1,4 +1,4 @@
-import EventCard from "../components/EventCard/page";
+import EventCard from "../components/EventCard";
 import Header from "../components/Header";
 
 const dummyEvent = [
@@ -26,10 +26,10 @@ export default function Event() {
             Dukung dan kunjungi acara budaya terdekat denganmu.
           </div>
         </div>
-        <div  className="flex">
-        {dummyEvent.map((event, index) => (
-            <EventCard key={index} eventName={event.eventName} />
-        ))}
+        <div className="flex">
+          {dummyEvent.map((event, index) => (
+            <EventCard key={index} name={event.eventName} />
+          ))}
         </div>
       </div>
     </div>
