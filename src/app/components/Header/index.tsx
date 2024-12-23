@@ -37,7 +37,7 @@ export default function Header() {
             Forum
           </Link>
           <Link
-            href=""
+            href="/acara"
             className="border-b-2 border-white hover:border-black hover:font-semibold"
           >
             Acara
