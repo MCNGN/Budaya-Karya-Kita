@@ -69,7 +69,7 @@ export default function Header() {
         </div>
 
         {isMenuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-white flex flex-col items-center sm:hidden">
+          <div className="absolute top-16 left-0 w-full bg-white flex flex-col items-center sm:hidden ">
             <Link
               href="/peta"
               className="border-b-2 border-white hover:border-black hover:font-semibold py-2"
