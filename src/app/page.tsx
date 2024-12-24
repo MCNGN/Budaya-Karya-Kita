@@ -6,11 +6,11 @@ export default function Home() {
     <div className="h-screen">
       <Header />
       <div className="flex flex-col justify-center items-center h-5/6">
-        <div className="w-[768px]">
-          <p className="text-7xl text-center mb-4">
+        <div className="w-[400px] sm:w-[768]">
+          <p className="text-5xl text-center text-warp mb-4 sm:text-7xl">
             Kenali keanekaragaman budaya Indonesia
           </p>
-          <p className="mb-4 text-center text-gray-500">
+          <p className="text-sm sm:text-base mb-4 text-center text-gray-500">
             Jelajahi kekayaan tradisi, budaya, seni, kuliner, musik, dan tarian
             dari Sabang sampai Merauke. Kenali, kembangkan, dan lestarikan ––
             mulai dari sini.

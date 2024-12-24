@@ -1,23 +1,32 @@
-import Image from "next/image";
-import Link from "next/link";
+'use client'
 
-export function Logo() {
-  return (
-    <Image src={"/budaya-horizontal.png"} alt="logo" width="200" height="100" />
-  );
-}
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header>
-      <nav className="flex justify-between place-items-center px-12 h-120 ">
-        <div className="flex">
-          <Link href="/"> 
-          <Logo />
+      <nav className="flex justify-between items-center px-6 sm:px-12 sm:h-120 relative">
+        <div className="relative w-[200px] h-[60px] sm:w-[200px] sm:h-[100px]">
+          <Link href="/">
+            <Image
+              src="/budaya-horizontal.png"
+              alt="logo"
+              layout="fill"
+              objectFit="contain"
+            />
           </Link>
         </div>
 
-        <div className="flex gap-6">
+        <div className="hidden sm:flex gap-6">
           <Link
             href="/peta"
             className="border-b-2 border-white hover:border-black hover:font-semibold"
@@ -26,13 +35,13 @@ export default function Header() {
           </Link>
           <Link
             href=""
-            className="border-b-2 border-white  hover:border-black hover:font-semibold"
+            className="border-b-2 border-white hover:border-black hover:font-semibold"
           >
             Edukasi
           </Link>
           <Link
             href="/forum"
-            className="border-b-2 border-white  hover:border-black hover:font-semibold"
+            className="border-b-2 border-white hover:border-black hover:font-semibold"
           >
             Forum
           </Link>
@@ -44,12 +53,61 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="flex gap-5">
-          <button>Masuk &gt;</button>
-          <button className="border rounded-full px-4 py-2 text-white bg-black">
-            Bergabung &gt;
-          </button>
+        <div className="hidden sm:flex gap-5">
+          <Link href="/login">
+            <div>Masuk &gt;</div>
+          </Link>
+          <Link href="/register">
+            <button className="border rounded-full px-4 py-2 text-white bg-black">
+              Bergabung &gt;
+            </button>
+          </Link>
         </div>
+
+        <div className="flex sm:hidden">
+          <RxHamburgerMenu onClick={toggleMenu} />
+        </div>
+
+        {isMenuOpen && (
+          <div className="absolute top-16 left-0 w-full bg-white flex flex-col items-center sm:hidden">
+            <Link
+              href="/peta"
+              className="border-b-2 border-white hover:border-black hover:font-semibold py-2"
+              onClick={toggleMenu}
+            >
+              Peta
+            </Link>
+            <Link
+              href=""
+              className="border-b-2 border-white hover:border-black hover:font-semibold py-2"
+              onClick={toggleMenu}
+            >
+              Edukasi
+            </Link>
+            <Link
+              href="/forum"
+              className="border-b-2 border-white hover:border-black hover:font-semibold py-2"
+              onClick={toggleMenu}
+            >
+              Forum
+            </Link>
+            <Link
+              href="/acara"
+              className="border-b-2 border-white hover:border-black hover:font-semibold py-2"
+              onClick={toggleMenu}
+            >
+              Acara
+            </Link>
+            <Link href="/login" className="py-2" onClick={toggleMenu}>
+              Masuk &gt;
+            </Link>
+            <Link href="/register" className="py-2" onClick={toggleMenu}>
+              <button className="border rounded-full px-4 py-2 text-white bg-black">
+                Bergabung &gt;
+              </button>
+            </Link>
+          </div>
+        )}
       </nav>
     </header>
   );
