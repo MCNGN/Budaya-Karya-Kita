@@ -2,10 +2,10 @@ import Header from "./components/Header";
 
 export default function Home() {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden">
       <Header />
       <div className="flex flex-col justify-center items-center flex-grow px-4 sm:px-0">
-        <div className="w-full max-w-md sm:max-w-lg text-center">
+        <div className="w-full max-w-md sm:max-w-2xl text-center">
           <p className="text-4xl sm:text-5xl lg:text-6xl font-bold text-warp mb-4">
             Kenali keanekaragaman budaya Indonesia
           </p>
