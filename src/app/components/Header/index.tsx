@@ -14,8 +14,8 @@ export default function Header() {
 
   return (
     <div>
-      <nav className="flex justify-between items-center px-4 sm:px-12 sm:h-120 relative">
-        <div className="relative w-[200px] h-[60px] sm:w-[200px] sm:h-[100px]">
+      <nav className="flex justify-between items-center px-4 sm:px-12 sm:h-120 relative font-inter">
+        <div className="relative w-[200px] h-[60px] sm:w-[250px] sm:h-[120px]">
           <Link href="/">
             <Image
               src="/budaya-horizontal.png"
@@ -26,7 +26,7 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="hidden sm:flex gap-6">
+        <div className="hidden sm:text-lg sm:flex gap-6">
           <Link
             href="/peta"
             className="border-b-2 border-white hover:border-black hover:font-semibold"
@@ -53,15 +53,17 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="hidden sm:flex gap-5">
+        <div className="hidden sm:text-lg sm:flex gap-4 items-center">
           <Link href="/login">
             <div>Masuk &gt;</div>
           </Link>
-          <Link href="/register">
-            <button className="border rounded-full px-4 py-2 text-white bg-black">
-              Bergabung &gt;
-            </button>
-          </Link>
+          <div>
+            <Link href="/register">
+              <button className="rounded-full py-2 px-4 text-white bg-black">
+                Bergabung &gt;
+              </button>
+            </Link>
+          </div>
         </div>
 
         <div className="flex sm:hidden">
@@ -70,7 +72,7 @@ export default function Header() {
 
         {isMenuOpen && (
           <div
-            className={`absolute top-[60px] left-0 w-full bg-white flex flex-col items-center sm:hidden transition-transform duration-700 ease-in-out ${
+            className={`absolute top-[60px] left-0 w-full bg-white flex flex-col items-center mb-4 sm:hidden transition-transform duration-700 ease-in-out ${
               isMenuOpen
                 ? "transform translate-y-0"
                 : "transform -translate-y-full"
@@ -104,13 +106,12 @@ export default function Header() {
             >
               Acara
             </Link>
+            <hr className="w-full border-t border-gray-300 my-1" />
             <Link href="/login" className="py-2" onClick={toggleMenu}>
-              Masuk &gt;
+              Masuk
             </Link>
             <Link href="/register" className="py-2" onClick={toggleMenu}>
-              <button className="border rounded-full px-4 py-2 text-white bg-black">
-                Bergabung &gt;
-              </button>
+              Bergabung
             </Link>
           </div>
         )}
