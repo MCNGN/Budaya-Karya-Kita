@@ -39,7 +39,9 @@ export default function Forum() {
             key={index}
             className="w-full max-w-md sm:max-w-2xl rounded-lg border border-gray-200 overflow-hidden bg-white shadow-md"
           >
-            <div className=" bg-gray-300 h-[500] w-full"></div>
+            <div className="bg-gray-300 h-[500] w-full">
+              Ini Foto
+            </div>
             <div className="p-4">
               <Post username={post.username} bio={post.bio} caption={post.caption} />
             </div>

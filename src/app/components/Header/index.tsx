@@ -20,8 +20,8 @@ export default function Header() {
             <Image
               src="/budaya-horizontal.png"
               alt="logo"
-              layout="fill"
-              objectFit="contain"
+              fill={true}
+              style={{ objectFit: "contain" }}
             />
           </Link>
         </div>
@@ -70,7 +70,7 @@ export default function Header() {
 
         {isMenuOpen && (
           <div
-            className={`absolute top-[60] left-0 w-full bg-white flex flex-col items-center sm:hidden transition-transform duration-700 ease-in-out ${
+            className={`absolute top-[60px] left-0 w-full bg-white flex flex-col items-center sm:hidden transition-transform duration-700 ease-in-out ${
               isMenuOpen
                 ? "transform translate-y-0"
                 : "transform -translate-y-full"
