@@ -31,16 +31,16 @@ const dummyData = [
 
 export default function Forum() {
   return (
-    <div>
+    <div className="h-screen flex flex-col overflow-auto">
       <Header />
-      <div className="flex flex-col items-center gap-4 my-6">
+      <div className="flex flex-col items-center gap-6 px-4 mb-6 sm:px-0">
         {dummyData.map((post, index) => (
           <div
             key={index}
-            className="flex justify-stretch w-[740px] h-[258px] rounded-lg border border-gray-200 overflow-hidden"
+            className="w-full max-w-md sm:max-w-2xl rounded-lg border border-gray-200 overflow-hidden bg-white shadow-md"
           >
-            <div className="w-1/3 bg-gray-300"></div>
-            <div className="w-2/3 content-center bg-white py-2 pl-10">
+            <div className=" bg-gray-300 h-[500] w-full"></div>
+            <div className="p-4">
               <Post username={post.username} bio={post.bio} caption={post.caption} />
             </div>
           </div>

@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { RxHamburgerMenu } from 'react-icons/rx';
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,8 +13,8 @@ export default function Header() {
   };
 
   return (
-    <header>
-      <nav className="flex justify-between items-center px-6 sm:px-12 sm:h-120 relative">
+    <div>
+      <nav className="flex justify-between items-center px-4 sm:px-12 sm:h-120 relative">
         <div className="relative w-[200px] h-[60px] sm:w-[200px] sm:h-[100px]">
           <Link href="/">
             <Image
@@ -69,7 +69,13 @@ export default function Header() {
         </div>
 
         {isMenuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-white flex flex-col items-center sm:hidden ">
+          <div
+            className={`absolute top-[60] left-0 w-full bg-white flex flex-col items-center sm:hidden transition-transform duration-700 ease-in-out ${
+              isMenuOpen
+                ? "transform translate-y-0"
+                : "transform -translate-y-full"
+            }`}
+          >
             <Link
               href="/peta"
               className="border-b-2 border-white hover:border-black hover:font-semibold py-2"
@@ -109,6 +115,6 @@ export default function Header() {
           </div>
         )}
       </nav>
-    </header>
+    </div>
   );
 }
