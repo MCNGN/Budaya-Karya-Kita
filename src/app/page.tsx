@@ -2,7 +2,7 @@ import Header from "./components/Header";
 
 export default function Home() {
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="flex h-screen  flex-col overflow-hidden">
       <Header />
       <div className="flex flex-col justify-center items-center flex-grow px-4 sm:px-0">
         <div className="w-full max-w-md sm:max-w-2xl text-center font-inter">
