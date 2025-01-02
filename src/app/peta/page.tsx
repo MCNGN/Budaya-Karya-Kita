@@ -6,6 +6,7 @@ import { MapContainer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import indonesia from "../components/indonesia-prov.json";
 import "./leaflet.css"
+import { GeoJsonObject } from "geojson"
 
 export default function MapPage() {
 
@@ -56,7 +57,7 @@ export default function MapPage() {
           zoomControl={false}
         >
           <GeoJSON
-            data={indonesia}
+            data={indonesia as GeoJsonObject}
             style={geoJSONStyle}
             onEachFeature={onEachFeature}
           />
