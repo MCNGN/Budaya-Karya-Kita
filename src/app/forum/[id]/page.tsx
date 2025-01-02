@@ -50,11 +50,15 @@ export default function Detail({ params }) {
         <div className="flex border border-gray-400 w-[1000] h-[520] rounded-md overflow-hidden">
           <div className="w-1/2 bg-gray-300"></div>
           <div className="py-2 pl-8">
-            <Post
-              username={postData.username}
-              bio={postData.bio}
-              caption={postData.caption}
-            />
+            {postData ? (
+              <Post
+                username={postData.username}
+                bio={postData.bio}
+                caption={postData.caption}
+              />
+            ) : (
+              <p>Post not found</p>
+            )}
           </div>
         </div>
       </div>
