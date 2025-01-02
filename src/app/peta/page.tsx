@@ -12,7 +12,7 @@ export default function MapPage() {
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       <Header />
-      <div className="flex flex-col justify-center items-center flex-grow bg-red-500">
+      <div className="flex flex-col justify-center items-center flex-grow">
         <MapComponent />
       </div>
     </div>

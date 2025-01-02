@@ -1,0 +1,16 @@
+.leaflet-popup-content-wrapper {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 2px;
+}
+  
+  .leaflet-popup-content {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .leaflet-popup-tip-container {
+    display: none; /* Hide the default popup tip */
+  }
