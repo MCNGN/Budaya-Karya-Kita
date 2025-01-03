@@ -46,7 +46,7 @@ export default function Detail({ params }) {
     <div className="flex h-screen flex-col overflow-hidden">
       <Header />
       <div className="flex flex-col justify-center items-center flex-grow px-4 sm:px-0">
-        <div className="flex border border-gray-400 w-[1000] h-[520] rounded-md overflow-hidden">
+        <div className="flex border border-gray-400 w-[1000px] h-[520px] rounded-md overflow-hidden">
           <div className="w-1/2 bg-gray-300"></div>
           <div className="py-2 pl-8">
             {postData ? (
