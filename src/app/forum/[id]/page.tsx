@@ -41,12 +41,11 @@ export default function Detail({ params }) {
 
 
   const postData = dummyData.find((p) => p.id === parseInt(id));
-  console.log(postData);
 
   return (
-    <div>
+    <div className="flex h-screen flex-col overflow-hidden">
       <Header />
-      <div className="flex h-screen justify-center items-center">
+      <div className="flex flex-col justify-center items-center flex-grow px-4 sm:px-0">
         <div className="flex border border-gray-400 w-[1000] h-[520] rounded-md overflow-hidden">
           <div className="w-1/2 bg-gray-300"></div>
           <div className="py-2 pl-8">
