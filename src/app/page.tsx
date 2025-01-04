@@ -1,10 +1,11 @@
 import Header from "./components/Header";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex h-screen  flex-col overflow-hidden">
+    <div className="flex h-screen flex-col overflow-hidden">
       <Header />
-      <div className="flex flex-col justify-center items-center flex-grow px-4 sm:px-0">
+      <div className="flex flex-col justify-center items-center flex-auto px-4 sm:px-0">
         <div className="w-full max-w-md sm:max-w-2xl text-center font-inter">
           <p className="text-4xl sm:text-5xl lg:text-6xl font-bold text-warp mb-4">
             Kenali keanekaragaman budaya Indonesia
@@ -16,9 +17,9 @@ export default function Home() {
           </p>
         </div>
 
-        <button className="px-6 py-3 bg-black text-white rounded-full text-lg sm:text-xl">
+        <Link href='/peta' className="px-6 py-3 bg-black text-white rounded-full text-lg sm:text-xl">
           Mulai Sekarang &gt;
-        </button>
+        </Link>
       </div>
     </div>
   );
