@@ -4,13 +4,18 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const selectedPage = usePathname();
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  console.log(selectedPage);
 
   return (
     <div>
@@ -29,25 +34,41 @@ export default function Header() {
         <div className="hidden sm:text-lg sm:flex gap-6">
           <Link
             href="/peta"
-            className="border-b-2 border-white hover:border-black hover:font-semibold"
+            className={`border-b-2 ${
+              selectedPage === "/peta"
+                ? "border-black font-semibold"
+                : "border-white hover:border-black hover:font-semibold"
+            }`}
           >
             Peta
           </Link>
           <Link
-            href=""
-            className="border-b-2 border-white hover:border-black hover:font-semibold"
+            href="/edukasi"
+            className={`border-b-2 ${
+              selectedPage === "/edukasi"
+                ? "border-black font-semibold"
+                : "border-white hover:border-black hover:font-semibold"
+            }`}
           >
             Edukasi
           </Link>
           <Link
             href="/forum"
-            className="border-b-2 border-white hover:border-black hover:font-semibold"
+            className={`border-b-2 ${
+              selectedPage === "/forum"
+                ? "border-black font-semibold"
+                : "border-white hover:border-black hover:font-semibold"
+            }`}
           >
             Forum
           </Link>
           <Link
             href="/acara"
-            className="border-b-2 border-white hover:border-black hover:font-semibold"
+            className={`border-b-2 ${
+              selectedPage === "/acara"
+                ? "border-black font-semibold"
+                : "border-white hover:border-black hover:font-semibold"
+            }`}
           >
             Acara
           </Link>
