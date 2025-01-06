@@ -2,8 +2,9 @@
 
 import Header from "@/app/components/Header";
 import Post from "@/app/components/Post";
+import { useParams } from "next/navigation";
 
-export default function Detail({ params }) {
+export default function Detail() {
   const dummyData = [
     {
       id: 1,
@@ -37,16 +38,16 @@ export default function Detail({ params }) {
     },
   ];
 
-  const { id } = params;
+  const params = useParams()
+  console.log(params)
 
-
-  const postData = dummyData.find((p) => p.id === parseInt(id));
+  const postData = dummyData.find((post) => post.id === Number(params.id))
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       <Header />
       <div className="flex flex-col justify-center items-center flex-grow px-4 sm:px-0">
-        <div className="flex border border-gray-400 w-[1000px] h-[520px] rounded-md overflow-hidden">
+        <div className="flex border border-gray-200 w-[1000px] h-[520px] rounded-md overflow-hidden shadow-md">
           <div className="w-1/2 bg-gray-300"></div>
           <div className="py-2 pl-8">
             {postData ? (

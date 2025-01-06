@@ -45,7 +45,10 @@ export default function Forum() {
             key={index}
             className="w-full max-w-md sm:max-w-2xl rounded-lg border border-gray-200 overflow-hidden bg-white shadow-md"
           >
-            <Link href= {`/forum/${post.id}`}
+            <Link
+              href={{
+                pathname: `/forum/${post.id}`
+              }}
             >
               <div className="bg-gray-300 h-[500px] w-full">Ini Foto</div>
               <div className="p-4">

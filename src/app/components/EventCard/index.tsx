@@ -1,3 +1,5 @@
+import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
+
 interface EventProps {
   name: string;
 }
@@ -8,7 +10,7 @@ export default function EventCard({ name }: EventProps) {
       <div className="h-[290px] sm:h-[340px] bg-gray-300"></div>
       <div className="flex h-[70px] bg-black text-white justify-between items-center p-4">
         <div className="text-lg">{name}</div>
-        <div className="text-xl">→</div>
+        <ChevronDoubleRightIcon className="size-6" />
       </div>
     </div>
   );

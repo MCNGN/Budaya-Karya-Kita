@@ -6,7 +6,7 @@ const dummyEvent = [
     eventName: "Festival Bangau",
   },
   {
-    eventName: "Event Game",
+    eventName: "Event Kesenian",
   },
   {
     eventName: "Festival Budaya",
