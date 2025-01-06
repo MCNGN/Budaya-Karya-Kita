@@ -10,6 +10,7 @@ export default function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -17,24 +18,27 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://budaya-karya-kita-backend.vercel.app/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    setErrorMessage(""); // Clear previous error message
+    const response = await fetch(
+      "https://budaya-karya-kita-backend.vercel.app/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
 
     if (response.ok) {
       // Handle successful login
-      console.log("Login successful");
       const loginTimestamp = new Date().getTime();
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("loginTimestamp", loginTimestamp.toString());
       router.push("/");
     } else {
-      // Handle login error
-      console.error("Login failed");
+      const errorResponse = await response.json();
+      setErrorMessage(errorResponse.error || "Login failed");
     }
   };
 
@@ -47,7 +51,16 @@ export default function Login() {
           <div className="w-[540px] h-[96px] text-5xl text-center font-inter">
             Selamat datang ! 👋
           </div>
-          <form onSubmit={handleLogin} className="w-[665px] font-inter flex flex-col items-center">
+
+          <form
+            onSubmit={handleLogin}
+            className="w-[665px] font-inter flex flex-col items-center"
+          >
+            {errorMessage && (
+              <div className="border border-red-500 bg-red-100 text-red-500 text-sm mt-2 mb-4 p-2 rounded w-full">
+                {errorMessage}
+              </div>
+            )}
             <div className="mb-4 w-full">
               <div className="mb-1 text-gray-500">Email</div>
               <input
@@ -81,6 +94,7 @@ export default function Login() {
                 </button>
               </div>
             </div>
+
             <button
               type="submit"
               className="w-[200px] rounded-full py-2 px-4 text-white bg-black text-center text-lg mb-5"

@@ -5,8 +5,10 @@ import "leaflet/dist/leaflet.css";
 import Indonesia from "../components/indonesia-prov.json";
 import "./leaflet.css";
 import { GeoJsonObject } from "geojson";
+import { useState } from "react";
 
 export default function MapComponent() {
+  const [provinceId, setProvinceId] = useState("")
 
   const onEachFeature = (feature, layer) => {
     layer.on({
@@ -19,6 +21,7 @@ export default function MapComponent() {
         });
         layer.bindPopup(`<div class="custom-popup">${feature.properties.Propinsi}</div>`).openPopup();
         // setSelectedFeature(feature);
+        setProvinceId(feature.properties.ID)
       },
       mouseout: (e) => {
         e.target.setStyle({
@@ -29,6 +32,7 @@ export default function MapComponent() {
           fillOpacity: 0.7,
         });
         layer.closePopup();
+        setProvinceId("")
         // setSelectedFeature(null);
       },
     });
@@ -46,6 +50,7 @@ export default function MapComponent() {
 
   return (
     <div className="relative h-full w-full">
+      <div>{provinceId}</div>
       <MapContainer
         center={[-2, 118]}
         zoom={5.5}

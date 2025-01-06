@@ -11,6 +11,7 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -18,21 +19,29 @@ export default function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://budaya-karya-kita-backend.vercel.app/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, email, password }),
-    });
+    setErrorMessage(""); // Clear previous error message
+    const response = await fetch(
+      "https://budaya-karya-kita-backend.vercel.app/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username.toLowerCase(),
+          email,
+          password,
+        }),
+      }
+    );
 
     if (response.ok) {
       // Handle successful registration
       console.log("Registration successful");
-      router.push('/login')
+      router.push("/login");
     } else {
-      // Handle registration error
-      console.error("Registration failed");
+      const errorResponse = await response.json();
+      setErrorMessage(errorResponse.error || "Registration failed");
     }
   };
 
@@ -59,6 +68,11 @@ export default function Register() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
+              {errorMessage === "Username already exists" && (
+                <div className=" text-red-500 text-sm font-semibold mt-2">
+                  {errorMessage}
+                </div>
+              )}
             </div>
             <div className="mb-4 w-full">
               <div className="mb-1 text-gray-500">Email</div>
@@ -69,6 +83,11 @@ export default function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+            {errorMessage === "Email already exists" && (
+              <div className="text-red-500 text-sm font-semibold mt-2">
+                {errorMessage}
+              </div>
+            )}
             </div>
             <div className="mb-9 w-full">
               <div className="mb-1 text-gray-500">Password</div>
