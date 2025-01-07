@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Header from "@/app/components/Header";
-import CategoryCard from "@/app/components/CategoryCard/page";
+import CategoryCard from "@/app/components/CategoryCard";
 
 export default function PetaDetail() {
   const params = useParams();
