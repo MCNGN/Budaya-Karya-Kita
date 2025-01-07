@@ -49,7 +49,7 @@ export default function PetaDetail() {
 
   const fetchProvince = async () => {
     try {
-      const response = await fetch("http://localhost:4000/province", {
+      const response = await fetch("https://budaya-karya-kita-backend.vercel.app/province", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
