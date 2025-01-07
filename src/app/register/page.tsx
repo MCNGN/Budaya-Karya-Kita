@@ -51,7 +51,7 @@ export default function Register() {
       <div className="flex h-screen">
         <div className="w-1/3 bg-red-500">a</div>
         <div className="w-2/3 bg-gray-200 flex flex-col justify-center items-center">
-          <div className="w-[540px] h-[96px] text-5xl text-center font-inter mb-11">
+          <div className="w-[600px] h-[96px] text-5xl text-center mb-11 font-medium">
             Gabung sekarang dalam komunitas berbudaya
           </div>
           <div></div>

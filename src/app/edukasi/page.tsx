@@ -93,7 +93,7 @@ export default function Edukasi() {
     <div className="flex h-screen flex-col overflow-hidden">
       <Header />
       <div className="flex flex-col items-center">
-        <div className="mt-6 mb-16 text-5xl w-[800px] h-[100px] text-center">
+        <div className="mt-6 mb-16 text-5xl w-[800px] h-[100px] text-center font-medium">
           Pelajari dan coba berbagai kesenian dan budaya Indonesia
         </div>
         <div className="flex items-center px-4 ">

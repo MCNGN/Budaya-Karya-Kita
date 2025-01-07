@@ -20,9 +20,9 @@ export default function Event() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-col px-4 pt-2 sm:px-12 font-inter">
-        <div className="w-full max-w-md sm:max-w-lg mb-8">
-          <div className="text-xl sm:text-3xl ">
+      <div className="flex flex-col px-4 pt-2 sm:px-12">
+        <div className="w-full max-w-md sm:max-w-lg mt-8 mb-8">
+          <div className="text-xl sm:text-3xl font-medium">
             Dukung dan kunjungi acara budaya terdekat denganmu.
           </div>
         </div>

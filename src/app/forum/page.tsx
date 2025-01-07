@@ -39,7 +39,7 @@ export default function Forum() {
   return (
     <div className="h-screen flex flex-col overflow-auto">
       <Header />
-      <div className="flex flex-col items-center gap-6 px-4 mb-6 sm:px-0 font-inter">
+      <div className="flex flex-col items-center gap-6 px-4 mb-6 sm:px-0">
         {dummyData.map((post, index) => (
           <div
             key={index}

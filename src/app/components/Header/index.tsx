@@ -64,7 +64,7 @@ export default function Header() {
             <Link
               href="/peta"
               className={`border-b-2 ${
-                selectedPage === "/peta"
+                selectedPage.startsWith("/peta")
                   ? "border-black font-semibold"
                   : "border-white hover:border-black hover:font-semibold"
               }`}

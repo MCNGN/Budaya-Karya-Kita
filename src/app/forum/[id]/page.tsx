@@ -4,7 +4,7 @@ import Header from "@/app/components/Header";
 import Post from "@/app/components/Post";
 import { useParams } from "next/navigation";
 
-export default function Detail() {
+export default function ForumDetail() {
   const dummyData = [
     {
       id: 1,
