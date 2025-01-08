@@ -9,7 +9,7 @@ import { GeoJsonObject } from "geojson";
 import { useRouter } from "next/navigation";
 
 export default function MapComponent() {
-  const router = useRouter()
+  const router = useRouter();
   // const [provinceId, setProvinceId] = useState("")
 
   const onEachFeature = (feature, layer) => {
@@ -21,7 +21,11 @@ export default function MapComponent() {
           color: "#666",
           fillOpacity: 0.7,
         });
-        layer.bindPopup(`<div class="custom-popup">${feature.properties.Propinsi}</div>`).openPopup();
+        layer
+          .bindPopup(
+            `<div class="custom-popup">${feature.properties.Propinsi}</div>`
+          )
+          .openPopup();
         // setSelectedFeature(feature);
         // setProvinceId(feature.properties.ID)
       },
@@ -52,10 +56,8 @@ export default function MapComponent() {
     };
   };
 
-
   return (
     <div className="relative h-full w-full">
-      
       <MapContainer
         center={[-2, 118]}
         zoom={5.5}
@@ -74,7 +76,6 @@ export default function MapComponent() {
           onEachFeature={onEachFeature}
         />
       </MapContainer>
-      
     </div>
   );
 }

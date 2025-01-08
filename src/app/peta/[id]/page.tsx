@@ -4,11 +4,13 @@ import { useParams } from "next/navigation";
 import Header from "@/app/components/Header";
 import CategoryCard from "@/app/components/CategoryCard";
 import Indonesia from "@/app/components/indonesia-prov.json";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function PetaDetail() {
   const params = useParams();
-  const [click, setClick] = useState(false)
+  const router = useRouter()
+  // const [click, setClick] = useState(false)
+  // const [nameCategory, setCategory] = useState("")
   //   const [provinceName, setProvinceName] = useState("");
   const category = [
     {
@@ -90,63 +92,29 @@ export default function PetaDetail() {
   const provinceName = feature?.properties.Propinsi;
 
   return (
-    <div className={`flex flex-col ${click ? "" :"h-screen"} overflow-hidden`}>
+    <div className={`flex flex-col h-screen overflow-hidden`}>
       <Header />
       <div
-        className={`flex flex-col w-full h-full px-12 ${
-          click ? "" : "mt-32"
+        className={`flex flex-col w-full h-full px-12 mt-32
         } `}
       >
         <div className="text-5xl">
           <div>{capitalizeWords(provinceName)}</div>
         </div>
-        {provinceName ? (
           <div>
-            <div className={`flex h-full justify-between mt-12 cursor-pointer ${click ? "hidden" : ""}`}>
+            <div className={`flex h-full justify-between mt-12 cursor-pointer`}>
               {category.map((value) => (
                 <CategoryCard
                   key={value.id}
                   name={value.name}
                   background={value.background}
                   image={value.image}
-                  onClick={() => setClick(true)}
+                  onClick={() => { router.push(`/peta/${params.id}/${value.name.toLowerCase()}`) }}
                 />
               ))}
             </div>
-            <div>
-              <div className={`flex flex-col sm:flex-row justify-between gap-8 mt-12 mb-12 w-full flex-wrap ${click ? "" : "hidden"}`}>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-                <div className="border rounded-lg w-[430px] h-[400px]">
-                  <div></div>
-                </div>
-              </div>
-            </div>
+            
           </div>
-        ) : (
-          <div className="text-5xl">
-            <div>Provinsi tidak ditemukan</div>
-          </div>
-        )}
       </div>
     </div>
   );
