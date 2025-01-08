@@ -4,11 +4,12 @@ interface Category {
   name: string;
   background: string;
   image: string;
+  onClick: () => void;
 }
 
-export default function CategoryCard({ name, background, image }: Category) {
+export default function CategoryCard({ name, background, image, onClick }: Category) {
   return (
-    <div className="flex hover:scale-110 transition-all">
+    <div className="flex hover:scale-110  transition-all" onClick={onClick}>
       <div
         className={`flex flex-col w-[280px] h-[380px] justify-center items-center ${background} rounded-2xl font-medium shadow-xl`}
       >
