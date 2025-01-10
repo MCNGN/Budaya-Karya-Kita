@@ -4,6 +4,7 @@ import { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie';
 
 export default function Login() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function Login() {
     e.preventDefault();
     setErrorMessage(""); // Clear previous error message
     const response = await fetch(
-      "https://budaya-karya-kita-backend.vercel.app/login",
+      "http://localhost:4000/login",
       {
         method: "POST",
         headers: {
@@ -31,11 +32,18 @@ export default function Login() {
     );
 
     if (response.ok) {
-      // Handle successful login
+      const data = await response.json();
       const loginTimestamp = new Date().getTime();
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("loginTimestamp", loginTimestamp.toString());
-      router.push("/");
+      Cookies.set("isLoggedIn", "true");
+      Cookies.set("loginTimestamp", loginTimestamp.toString());
+      Cookies.set("userRole", data.role); // Store user role
+      console.log(data.role)
+
+      if (data.role === "admin") {
+        router.push("/admin/dashboard");
+      } else {
+        router.push("/");
+      }
     } else {
       const errorResponse = await response.json();
       setErrorMessage(errorResponse.error || "Login failed");

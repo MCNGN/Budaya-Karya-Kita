@@ -7,6 +7,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
+import Cookies from 'js-cookie';
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,22 +27,22 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("loginTimestamp");
+    Cookies.remove("isLoggedIn");
+    Cookies.remove("loginTimestamp");
     setIsLoggedIn(false);
     router.push('/');
   };
 
   useEffect(() => {
-    const loginTimestamp = localStorage.getItem("loginTimestamp");
+    const loginTimestamp = Cookies.get("loginTimestamp");
     const currentTime = new Date().getTime();
     const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
 
     if (loginTimestamp && currentTime - parseInt(loginTimestamp) < sessionDuration) {
       setIsLoggedIn(true);
     } else {
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("loginTimestamp");
+      Cookies.remove("isLoggedIn");
+      Cookies.remove("loginTimestamp");
       setIsLoggedIn(false);
     }
   }, []);
