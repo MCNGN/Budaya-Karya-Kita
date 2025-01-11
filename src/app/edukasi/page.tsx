@@ -3,33 +3,7 @@
 import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
-
-const carouselItems = [
-  {
-    id: 1,
-    photo: "Foto 1",
-    description: "Deskripsi 1",
-    bgColor: "bg-red-500",
-  },
-  {
-    id: 2,
-    photo: "Foto 2",
-    description: "Deskripsi 2",
-    bgColor: "bg-blue-500",
-  },
-  {
-    id: 3,
-    photo: "Foto 3",
-    description: "Deskripsi 3",
-    bgColor: "bg-purple-500",
-  },
-  {
-    id: 4,
-    photo: "Foto 4",
-    description: "Deskripsi 4",
-    bgColor: "bg-yellow-500",
-  },
-];
+import EducationCard from "../components/EducationCard";
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -39,44 +13,36 @@ function shuffleArray(array) {
   return array;
 }
 
-function Card({ currentIndex, shuffledItems }) {
-  return (
-    <div className="w-[900px] h-[410px] rounded-lg overflow-hidden">
-      <div
-        className="flex transition-transform duration-1000"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {shuffledItems.map((item) => (
-          <div
-            key={item.id}
-            className={`w-full flex-shrink-0 ${item.bgColor}`}
-            style={{ width: "900px", height: "410px" }}
-          >
-            <div className="flex flex-row h-full w-full">
-              <div className="w-1/3">{item.photo}</div>
-              <div className="w-2/3 bg-green-500">{item.description}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function Edukasi() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [shuffledItems, setShuffledItems] = useState<typeof carouselItems>([]);
+  const [shuffledItems, setShuffledItems] = useState([]);
+
 
   useEffect(() => {
-    setShuffledItems(shuffleArray([...carouselItems]));
+    const fetchCarouselItems = async () => {
+      try {
+        const response = await fetch("https://budaya-karya-kita-backend.vercel.app/education/");
+        if (!response.ok) {
+          throw new Error("Failed to fetch carousel items");
+        }
+        const data = await response.json();
+        setShuffledItems(shuffleArray(data));
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    fetchCarouselItems();
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledItems.length);
-    }, 10000);
+    if (shuffledItems.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledItems.length);
+      }, 10000);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   }, [shuffledItems]);
 
   const handlePrev = () => {
@@ -89,34 +55,44 @@ export default function Edukasi() {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledItems.length);
   };
 
+
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
+    <div className="flex flex-col overflow-hidden">
       <Header />
-      <div className="flex flex-col items-center">
-        <div className="mt-6 mb-16 text-5xl w-[800px] h-[100px] text-center font-medium">
+      <div className="flex flex-col justify-center items-center">
+        <div className="mt-12 mb-2 text-5xl w-[800px] h-[100px] text-center font-medium">
           Pelajari dan coba berbagai kesenian dan budaya Indonesia
         </div>
-        <div className="flex items-center px-4 ">
-          <button onClick={handlePrev}>
-            <ChevronLeftIcon className="size-10 mx-4 active:text-gray-500" />
-          </button>
-
-          <Card currentIndex={currentIndex} shuffledItems={shuffledItems} />
-
-          <button onClick={handleNext} className="">
-            <ChevronRightIcon className="size-10 mx-4 active:text-gray-500" />
-          </button>
+        <div className="text-lg w-[800px] mb-4 text-center font-medium text-gray-600">
+          Klik gambar dibawah untuk melihat lebih jelas
         </div>
-        <div className="flex justify-center mt-4">
-          {shuffledItems.map((_, index) => (
-            <div
-              key={index}
-              className={`w-3 h-3 mx-1 rounded-full ${
-                index === currentIndex ? "bg-black" : "bg-gray-400"
-              }`}
-            ></div>
-          ))}
+        <div className="flex w-[1000px] items-center px-4">
+          {shuffledItems.length > 1 && (
+            <button onClick={handlePrev}>
+              <ChevronLeftIcon className="size-10 mx-4 active:text-gray-500" />
+            </button>
+          )}
+
+          <EducationCard currentIndex={currentIndex} shuffledItems={shuffledItems} />
+
+          {shuffledItems.length > 1 && (
+            <button onClick={handleNext} className="">
+              <ChevronRightIcon className="size-10 mx-4 active:text-gray-500" />
+            </button>
+          )}
         </div>
+        {shuffledItems.length > 1 && (
+          <div className="flex justify-center mt-1">
+            {shuffledItems.map((_, index) => (
+              <div
+                key={index}
+                className={`w-3 h-3 mx-1 rounded-full ${
+                  index === currentIndex ? "bg-black" : "bg-gray-400"
+                }`}
+              ></div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

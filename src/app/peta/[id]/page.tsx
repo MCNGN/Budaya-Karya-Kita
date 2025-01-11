@@ -9,9 +9,7 @@ import { useRouter } from "next/navigation";
 export default function PetaDetail() {
   const params = useParams();
   const router = useRouter();
-  // const [click, setClick] = useState(false)
-  // const [nameCategory, setCategory] = useState("")
-  //   const [provinceName, setProvinceName] = useState("");
+  
   const category = [
     {
       id: 1,

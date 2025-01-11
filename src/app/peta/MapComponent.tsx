@@ -5,7 +5,6 @@ import "leaflet/dist/leaflet.css";
 import Indonesia from "../components/indonesia-prov.json";
 import "./leaflet.css";
 import { GeoJsonObject } from "geojson";
-// import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const capitalizeWords = (str) => {
@@ -14,7 +13,7 @@ const capitalizeWords = (str) => {
 
 export default function MapComponent() {
   const router = useRouter();
-  // const [provinceId, setProvinceId] = useState("")
+
 
   const onEachFeature = (feature, layer) => {
     layer.on({
@@ -32,8 +31,6 @@ export default function MapComponent() {
             )}</div>`
           )
           .openPopup();
-        // setSelectedFeature(feature);
-        // setProvinceId(feature.properties.ID)
       },
       mouseout: (e) => {
         e.target.setStyle({
@@ -44,8 +41,6 @@ export default function MapComponent() {
           fillOpacity: 0.7,
         });
         layer.closePopup();
-        // setProvinceId("")
-        // setSelectedFeature(null);
       },
       click: () => {
         router.push(`/peta/${feature.properties.ID}`);

@@ -34,7 +34,6 @@ export default function Test() {
 
         if (response.ok) {
           const jsonResponse = await response.json();
-          console.log(jsonResponse);
           setCultureData(jsonResponse);
         } else {
           console.error(
