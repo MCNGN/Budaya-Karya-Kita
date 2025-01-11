@@ -18,7 +18,7 @@ const UserManagement = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const token = Cookies.get("token");
-      fetch("http://localhost:4000/users", {
+      fetch("http://budaya-karya-kita-backend.vercel.app/users", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -44,22 +44,22 @@ const UserManagement = () => {
     fetchUsers();
   }, []);
 
-  const handleDelete = (id: number) => {
-    fetch(`https://your-api-endpoint/users/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((error) => {
-            throw new Error(error.message || "Failed to delete user");
-          });
-        }
-        setUsers(users.filter((user) => user.id !== id));
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  };
+  // const handleDelete = (id: number) => {
+  //   fetch(`https://your-api-endpoint/users/${id}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         return response.json().then((error) => {
+  //           throw new Error(error.message || "Failed to delete user");
+  //         });
+  //       }
+  //       // setUsers(users.filter((user) => user.id !== id));
+  //     })
+  //     .catch((error) => {
+  //       setError(error.message);
+  //     });
+  // };
 
   return (
     <div className="flex">
@@ -90,7 +90,7 @@ const UserManagement = () => {
                     <button className="text-blue-500 mr-2">Edit</button>
                     <button
                       className="text-red-500"
-                      onClick={() => handleDelete(user.id)}
+                      // onClick={() => handleDelete(user.id)}
                     >
                       Delete
                     </button>
