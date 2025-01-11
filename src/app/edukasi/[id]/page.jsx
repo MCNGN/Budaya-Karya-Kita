@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 export default function EdukasiDetail() {
-
   const params = useParams();
   const [education, setEducation] = useState({});
   const [educations, setEducations] = useState([]);
@@ -32,7 +31,6 @@ export default function EdukasiDetail() {
 
         if (response.ok) {
           const jsonResponse = await response.json();
-          console.log(jsonResponse);
           setEducation(jsonResponse);
         } else {
           console.error(
@@ -48,16 +46,18 @@ export default function EdukasiDetail() {
 
     const fetchCultureDetail = async () => {
       try {
-        const response = await fetch(`https://budaya-karya-kita-backend.vercel.app:4000/education/`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `https://budaya-karya-kita-backend.vercel.app/education/`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (response.ok) {
           const jsonResponse = await response.json();
-          console.log(jsonResponse);
           setEducations(jsonResponse);
         } else {
           console.error(
@@ -90,10 +90,13 @@ export default function EdukasiDetail() {
               />
             </div>
           </div>
-          <div className="flex flex-col ml-6  ">
+          <div className="flex flex-col ml-6 ">
             {educations.map((item, index) => (
-              <div key={index} className="flex flex-row h-[141px] hover:cursor-pointer mb-6">
-                <div className="flex-none rounded-lg border-black w-[250px] mr-2 overflow-hidden" >
+              <div
+                key={index}
+                className="flex flex-row h-[141px] hover:cursor-pointer mb-6"
+              >
+                <div className="flex-none rounded-lg border-black w-[250px] mr-2 overflow-hidden">
                   <Image
                     src={`${item.image}`}
                     alt=""
@@ -104,10 +107,9 @@ export default function EdukasiDetail() {
                 <div className="flex flex-col ">
                   <div className="break-word mb-1">{item.title}</div>
                   <div>
-
-                  <div className="break-word text-sm text-gray-500 line-clamp-4">
-                    {item.description}
-                  </div>
+                    <div className="break-word text-sm text-gray-500 line-clamp-4">
+                      {item.description}
+                    </div>
                   </div>
                 </div>
               </div>
