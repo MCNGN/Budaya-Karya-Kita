@@ -18,7 +18,7 @@ export default function CategoryCard({ name, background, image, onClick }: Categ
             src={image}
             width={600}
             height={600}
-             className="rounded-full aspect-square object-cover"
+            className="rounded-full aspect-square object-cover"
             alt=""
           />
         </div>

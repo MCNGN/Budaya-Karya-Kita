@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../component/Sidebar";
+import Cookies from "js-cookie";
 
 interface User {
   id_generate: string;
@@ -16,7 +17,12 @@ const UserManagement = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      fetch("http://localhost:4000/users")
+      const token = Cookies.get("token");
+      fetch("http://localhost:4000/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((response) => {
           if (!response.ok) {
             return response.json().then((error) => {

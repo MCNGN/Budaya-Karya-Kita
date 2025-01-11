@@ -3,6 +3,8 @@ import Header from "@/app/components/Header";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Indonesia from "@/app/components/indonesia-prov.json";
+import Image from "next/image";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 export default function Test() {
   const router = useRouter();
@@ -10,7 +12,7 @@ export default function Test() {
 
   interface Culture {
     title: string;
-    name: string;
+    image: string;
     description: string;
     province_name: string;
   }
@@ -21,7 +23,7 @@ export default function Test() {
     const fetchCulture = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/culture/${params.id}/${params.categoryId}`,
+          `http://budaya-karya-kita-backend.vercel.app/culture/${params.id}/${params.categoryName}`,
           {
             method: "GET",
             headers: {
@@ -29,8 +31,6 @@ export default function Test() {
             },
           }
         );
-
-        console.log(response);
 
         if (response.ok) {
           const jsonResponse = await response.json();
@@ -49,7 +49,14 @@ export default function Test() {
     };
 
     fetchCulture();
-  }, [params.id, params.categoryId]);
+  }, [params.id, params.categoryName]);
+
+  const capitalizeWords = (str) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
 
   const feature = Indonesia.features.find(
     (f) => f.properties.ID === Number(params.id)
@@ -57,22 +64,53 @@ export default function Test() {
   const provinceName = feature?.properties.Propinsi;
 
   return (
-    <div>
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header />
-      <div>{provinceName}</div>
-      <div
-        className="flex flex-col sm:flex-row gap-8 mt-12 mb-12 w-full flex-wrap "
-        onClick={() => router.back()}
-      >
+      <div className="px-12 h-full w-full">
+        <div className="flex items-center text-base mb-4 w-[180px] hover:scale-110 hover:ml-2">
+          <ChevronLeftIcon className="size-5 mr-1" />
+          <div className="cursor-pointer" onClick={() => router.back()}>
+            Kembali ke kategori
+          </div>
+        </div>
+        <div className="text-4xl font-medium">
+          {capitalizeWords(params.categoryName)} di {provinceName}
+        </div>
+
         {cultureData.length > 0 ? (
           cultureData.map((item, index) => (
-            <div key={index} className="border rounded-lg w-[430px] h-[400px]">
-              <div>{item.name}</div>
-              <div>{item.description}</div>
+            <div
+              key={index}
+              className="flex flex-col sm:flex-row gap-8 mt-12 mb-12 w-full flex-wrap"
+            >
+              <div
+                key={index}
+                className="shadow-xl border rounded-lg w-[430px] h-[550px] text-lg font-normal overflow-hidden"
+              >
+                <div>
+                  <Image
+                    src={item.image}
+                    height={500}
+                    width={500}
+                    alt=""
+                    className="shadow-md mb-4"
+                  />
+                </div>
+                <div className="px-2 text-wrap ">
+                  <div className="text-3xl mb-2 font-semibold">
+                    {item.title}
+                  </div>
+                  <div className="text-gray-500">{item.description}</div>
+                </div>
+              </div>
             </div>
           ))
         ) : (
-          <div>Tidak ada data</div>
+          <div className="flex flex-col h-full w-full justify-center items-center">
+            <div className="text-3xl text-gray-800 font-medium">
+              Tidak ada data
+            </div>
+          </div>
         )}
       </div>
     </div>

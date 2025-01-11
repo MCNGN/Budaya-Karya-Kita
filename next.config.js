@@ -7,6 +7,12 @@ module.exports = {
           port: '',
           search: '',
         },
+        {
+          protocol: 'https',
+          hostname: 'i.ytimg.com',
+          port: '',
+          search: '',
+        },
       ],
     },
   }

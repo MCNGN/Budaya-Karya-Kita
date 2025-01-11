@@ -8,6 +8,10 @@ import { GeoJsonObject } from "geojson";
 // import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+const capitalizeWords = (str) => {
+  return str.toUpperCase();
+};
+
 export default function MapComponent() {
   const router = useRouter();
   // const [provinceId, setProvinceId] = useState("")
@@ -23,7 +27,9 @@ export default function MapComponent() {
         });
         layer
           .bindPopup(
-            `<div class="custom-popup">${feature.properties.Propinsi}</div>`
+            `<div class="custom-popup">${capitalizeWords(
+              feature.properties.Propinsi
+            )}</div>`
           )
           .openPopup();
         // setSelectedFeature(feature);

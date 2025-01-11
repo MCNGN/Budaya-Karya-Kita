@@ -7,8 +7,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
-import Cookies from 'js-cookie';
-
+import Cookies from "js-cookie";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,8 +29,9 @@ export default function Header() {
   const handleLogout = () => {
     Cookies.remove("isLoggedIn");
     Cookies.remove("loginTimestamp");
+    Cookies.remove("accessToken");
     setIsLoggedIn(false);
-    router.push('/');
+    router.push("/");
   };
 
   useEffect(() => {
@@ -38,7 +39,10 @@ export default function Header() {
     const currentTime = new Date().getTime();
     const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
 
-    if (loginTimestamp && currentTime - parseInt(loginTimestamp) < sessionDuration) {
+    if (
+      loginTimestamp &&
+      currentTime - parseInt(loginTimestamp) < sessionDuration
+    ) {
       setIsLoggedIn(true);
     } else {
       Cookies.remove("isLoggedIn");
@@ -109,12 +113,18 @@ export default function Header() {
         <div className="hidden sm:text-lg sm:flex gap-4 items-center">
           {isLoggedIn ? (
             <div className="flex w-[220px]">
-              <button onClick={toggleDropdown} className="flex w-full h-full justify-end">
-                <UserCircleIcon className="size-9"/>
+              <button
+                onClick={toggleDropdown}
+                className="flex w-full h-full justify-end"
+              >
+                <UserCircleIcon className="size-9" />
               </button>
               {isDropdownOpen && (
                 <div className="absolute right-12 mt-9 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
-                  <Link href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                  <Link
+                    href="/settings"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
                     Settings
                   </Link>
                   <button
@@ -125,20 +135,24 @@ export default function Header() {
                   </button>
                 </div>
               )}
-            </div> 
+            </div>
           ) : (
-            <>
+            <div className="flex gap-2 items-center">
               <Link href="/login">
-                <div>Masuk &gt;</div>
+                <div className="flex items-center gap-1 hover:text-neutral-800">
+                  <div>Masuk </div>
+                  <ChevronRightIcon className="size-5" />
+                </div>
               </Link>
               <div>
                 <Link href="/register">
-                  <button className="rounded-full py-2 px-4 text-white bg-black">
-                    Bergabung &gt;
+                  <button className="flex justify-center rounded-3xl py-2 px-3 text-white bg-black items-center gap-1 hover:bg-neutral-800">
+                    <div>Bergabung</div>
+                    <ChevronRightIcon className="size-5" />
                   </button>
                 </Link>
               </div>
-            </>
+            </div>
           )}
         </div>
 

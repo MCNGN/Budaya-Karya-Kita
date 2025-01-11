@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function PetaDetail() {
   const params = useParams();
-  const router = useRouter()
+  const router = useRouter();
   // const [click, setClick] = useState(false)
   // const [nameCategory, setCategory] = useState("")
   //   const [provinceName, setProvinceName] = useState("");
@@ -51,41 +51,6 @@ export default function PetaDetail() {
     },
   ];
 
-  const capitalizeWords = (str) => {
-    return str
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ");
-  };
-
-  //   const fetchProvince = async () => {
-  //     try {
-  //       const response = await fetch("https://budaya-karya-kita-backend.vercel.app/province", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           id: params.id, // Ensure the correct parameter is used
-  //         }),
-  //       });
-
-  //       if (response.ok) {
-  //         const jsonResponse = await response.json();
-  //         console.log(jsonResponse);
-  //         setProvinceName(capitalizeWords(jsonResponse.province_name));
-  //       } else {
-  //         console.error("Failed to fetch:", response.status, response.statusText);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error:", error);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchProvince();
-  //   });
-
   const feature = Indonesia.features.find(
     (f) => f.properties.ID === Number(params.id)
   );
@@ -99,22 +64,23 @@ export default function PetaDetail() {
         } `}
       >
         <div className="text-5xl">
-          <div>{capitalizeWords(provinceName)}</div>
+          <div>{provinceName}</div>
         </div>
-          <div>
-            <div className={`flex h-full justify-between mt-12 cursor-pointer`}>
-              {category.map((value) => (
-                <CategoryCard
-                  key={value.id}
-                  name={value.name}
-                  background={value.background}
-                  image={value.image}
-                  onClick={() => { router.push(`/peta/${params.id}/${value.name.toLowerCase()}`) }}
-                />
-              ))}
-            </div>
-            
+        <div>
+          <div className={`flex h-full justify-between mt-12 cursor-pointer`}>
+            {category.map((value) => (
+              <CategoryCard
+                key={value.id}
+                name={value.name}
+                background={value.background}
+                image={value.image}
+                onClick={() => {
+                  router.push(`/peta/${params.id}/${value.name.toLowerCase()}`);
+                }}
+              />
+            ))}
           </div>
+        </div>
       </div>
     </div>
   );
