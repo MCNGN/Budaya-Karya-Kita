@@ -18,7 +18,7 @@ const UserManagement = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const token = Cookies.get("token");
-      fetch("http://budaya-karya-kita-backend.vercel.app/users", {
+      fetch("https://budaya-karya-kita-backend.vercel.app/users", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

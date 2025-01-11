@@ -21,7 +21,7 @@ export default function Login() {
     e.preventDefault();
     setErrorMessage(""); // Clear previous error message
     const response = await fetch(
-      "http://budaya-karya-kita-backend.vercel.app/login",
+      "https://budaya-karya-kita-backend.vercel.app/login",
       {
         method: "POST",
         headers: {

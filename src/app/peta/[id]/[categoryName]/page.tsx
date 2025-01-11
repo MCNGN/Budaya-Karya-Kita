@@ -23,7 +23,7 @@ export default function Test() {
     const fetchCulture = async () => {
       try {
         const response = await fetch(
-          `http://budaya-karya-kita-backend.vercel.app/culture/${params.id}/${params.categoryName}`,
+          `https://budaya-karya-kita-backend.vercel.app/culture/${params.id}/${params.categoryName}`,
           {
             method: "GET",
             headers: {
