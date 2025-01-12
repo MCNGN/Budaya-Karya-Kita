@@ -26,38 +26,38 @@ export default function Forum() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchForumData = async () => {
-      try {
-        const response = await fetch(
-          "https://budaya-karya-kita-backend.vercel.app/forum"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch forum data");
-        }
-        const data = await response.json();
-
-        // Fetch usernames for each post
-        const updatedData = await Promise.all(
-          data.map(async (post: PostData) => {
-            const userResponse = await fetch(
-              `https://budaya-karya-kita-backend.vercel.app/users/${post.user_id}`
-            );
-            const userData = await userResponse.json();
-            return {
-              ...post,
-              username: userData.username,
-              profile: userData.profile,
-            };
-          })
-        );
-
-        setForumData(updatedData);
-      } catch (error) {
-        console.error("Error fetching forum data:", error);
+  const fetchForumData = async () => {
+    try {
+      const response = await fetch(
+        "https://budaya-karya-kita-backend.vercel.app/forum"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch forum data");
       }
-    };
+      const data = await response.json();
 
+      // Fetch usernames for each post
+      const updatedData = await Promise.all(
+        data.map(async (post: PostData) => {
+          const userResponse = await fetch(
+            `https://budaya-karya-kita-backend.vercel.app/users/${post.user_id}`
+          );
+          const userData = await userResponse.json();
+          return {
+            ...post,
+            username: userData.username,
+            profile: userData.profile,
+          };
+        })
+      );
+
+      setForumData(updatedData);
+    } catch (error) {
+      console.error("Error fetching forum data:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchForumData();
 
     // Check if user is logged in
@@ -132,6 +132,8 @@ export default function Forum() {
       if (!response.ok) {
         throw new Error("Failed to create new post");
       }
+
+      fetchForumData();
     } catch (error) {
       console.error("Error creating new post:", error);
     }

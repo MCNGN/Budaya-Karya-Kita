@@ -5,6 +5,7 @@ import Post from "@/app/components/Post";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Cookies from "js-cookie";
 
 export default function ForumDetail() {
   // const dummyData = [
@@ -50,8 +51,19 @@ export default function ForumDetail() {
     image: string;
   }
 
-  const [forumData, setForumData] = useState<PostData | null>(null);
   const params = useParams();
+  const [forumData, setForumData] = useState<PostData | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const userCookie = Cookies.get("isLoggedIn");
+      if (userCookie) {
+        setIsLoggedIn(true);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   useEffect(() => {
     const fetchForumData = async () => {
@@ -88,15 +100,54 @@ export default function ForumDetail() {
         {forumData ? (
           <div className="flex border border-gray-200 w-[1000px] h-[520px] rounded-md overflow-hidden shadow-md">
             <div className="w-1/2 bg-gray-300 relative">
-              <Image src={forumData.image} alt="" fill={true} objectFit="cover" />
+              <Image
+                src={forumData.image}
+                alt=""
+                fill={true}
+                objectFit="cover"
+              />
             </div>
-            <div className="py-2 pl-8">
+            <div className="py-2 pl-8 w-1/2 bg-red">
               <Post
                 key={forumData.id}
                 username={forumData.username}
                 profile={forumData.profile}
                 caption={forumData.caption}
               />
+              <div className="relative">
+                <div className="flex flex-row items-start px-4 w-full mb-4">
+                  <div className="w-[30px] h-[30px] rounded-full inline-flex items-center justify-center bg-gray-500 text-gray-700 flex-shrink-0 mr-2 relative">
+                    <Image
+                      src={"https://i.imgur.com/nBk7ymi.jpeg"}
+                      alt=""
+                      width={45}
+                      height={45}
+                      className="shadow-xl border-black rounded-full"
+                    />
+                  </div>
+                  <div className="break-word text-xs">
+                    Test ini komen Test ini komen Test ini komen Test ini komen
+                    Test ini komen Test ini komen Test ini komen Test ini komen
+                    Test ini komen Test ini komen Test ini komen Test ini komen
+                  </div>
+                </div>
+
+                {isLoggedIn && (
+                  <div className="absolute top-80 left-0 w-full p-4 bg-white">
+                    <input
+                      type="text"
+                      placeholder="Add a comment..."
+                      className="w-full px-3 py-2 border rounded-lg focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 right-7 flex items-center "
+                    >
+                      <div className="hover:text-gray-500">Post</div>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ) : (
