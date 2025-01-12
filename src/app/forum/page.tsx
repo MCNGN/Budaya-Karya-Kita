@@ -2,42 +2,12 @@
 import Link from "next/link";
 import Header from "../components/Header";
 import Post from "../components/Post";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
-
-// const dummyData = [
-//   {
-//     id: 1,
-//     username: "@user1",
-//     bio: "Bio 1",
-//     caption: "Foto bersama ondel-ondel di Jakarta hari Sabtu lalu 👨‍👩‍👧‍👦🔥",
-//   },
-//   {
-//     id: 2,
-//     username: "@user2",
-//     bio: "Bio 2",
-//     caption: "Menikmati kuliner khas Bandung 🍜🍲",
-//   },
-//   {
-//     id: 3,
-//     username: "@user3",
-//     bio: "Bio 3",
-//     caption: "Liburan ke Bali dengan keluarga 🏖️🌴",
-//   },
-//   {
-//     id: 4,
-//     username: "@user4",
-//     bio: "Bio 4",
-//     caption: "Menyaksikan pertunjukan wayang kulit di Yogyakarta 🎭",
-//   },
-//   {
-//     id: 5,
-//     username: "@user5",
-//     bio: "Bio 5",
-//     caption: "Berburu batik di Solo 🧵",
-//   },
-// ];
+import { useDropzone } from "react-dropzone";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 export default function Forum() {
   interface PostData {
@@ -54,11 +24,14 @@ export default function Forum() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [caption, setCaption] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchForumData = async () => {
       try {
-        const response = await fetch("http://localhost:4000/forum");
+        const response = await fetch(
+          "https://budaya-karya-kita.vercel.app/forum"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch forum data");
         }
@@ -68,7 +41,7 @@ export default function Forum() {
         const updatedData = await Promise.all(
           data.map(async (post: PostData) => {
             const userResponse = await fetch(
-              `http://localhost:4000/users/${post.user_id}`
+              `https://budaya-karya-kita.vercel.app/users/${post.user_id}`
             );
             const userData = await userResponse.json();
             return {
@@ -88,8 +61,8 @@ export default function Forum() {
     fetchForumData();
 
     // Check if user is logged in
-    const token = Cookies.get("token");
-    setIsLoggedIn(!!token);
+    const isLoggedIn = Cookies.get("isLoggedIn");
+    setIsLoggedIn(!!isLoggedIn);
   }, []);
 
   const openModal = () => {
@@ -98,6 +71,8 @@ export default function Forum() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setImagePreview(null);
+    setImageFile(null);
   };
 
   const handleImageUpload = async () => {
@@ -105,8 +80,7 @@ export default function Forum() {
 
     const formData = new FormData();
     formData.append("image", imageFile);
-    formData.append("type", "file")
-    console.log(formData)
+    formData.append("type", "file");
 
     const response = await fetch("https://api.imgur.com/3/image", {
       method: "POST",
@@ -117,23 +91,59 @@ export default function Forum() {
     });
 
     const data = await response.json();
-    console.log(data)
-    return data.data.link;
+    return data.data;
   };
 
-  const handleNewPost = async (e) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+  const handleNewPost = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const imageUrl = await handleImageUpload();
-    if (!imageUrl) {
+    const data = await handleImageUpload();
+    if (!data) {
       console.error("Image upload failed");
       return;
     }
 
+    const newPost = {
+      caption,
+      image: data.link,
+      user_id: Cookies.get("id"),
+    };
+
+    try {
+      const response = await fetch(
+        "https://budaya-karya-kita.vercel.app/forum",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newPost),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to create new post");
+      }
+    } catch (error) {
+      console.error("Error creating new post:", error);
+    }
+
     // Handle new post submission logic here, including sending the imageUrl to your backend
-    console.log("New post created with image URL:", imageUrl);
 
     closeModal();
+  };
+
+  const cancelImagePreview = () => {
+    setImagePreview(null);
+    setImageFile(null);
   };
 
   return (
@@ -168,18 +178,58 @@ export default function Forum() {
       {isLoggedIn && (
         <button
           onClick={openModal}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md fixed bottom-4 right-4"
+          className="bg-black text-white px-3 py-3 rounded-full fixed bottom-4 right-4 transform transition-transform hover:scale-110"
         >
-          New Post
+          <div className="flex items-center p-1">
+            <PlusIcon className="h-6 w-6" />
+            <div className="ml-2">New Post</div>
+          </div>
         </button>
       )}
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl mb-4">Create New Post</h2>
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <form onSubmit={handleNewPost}>
-              <div className="mb-4">
+              <div className="flex mb-4 items-center justify-center h-full w-full">
+                {!imagePreview && (
+                  <div className="flex items-center justify-center w-[480px] h-[320px] bg-gray-500">
+                    <div
+                      {...getRootProps()}
+                      className="px-3 py-2 w-[300] border rounded-lg flex items-center justify-center cursor-pointer"
+                    >
+                      <input
+                        {...getInputProps()}
+                        accept="image/png, image/jpeg, image/jpg"
+                        className="hidden"
+                      />
+
+                      <p className="text-white">
+                        Drop file here or select the files
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {imagePreview && (
+                  <div className="relative ">
+                    <Image
+                      src={imagePreview}
+                      alt="Image Preview"
+                      width={500}
+                      height={500}
+                      className="object-contain"
+                    />
+                    <button
+                      type="button"
+                      onClick={cancelImagePreview}
+                      className="absolute top-1 right-1 bg-white rounded-full"
+                    >
+                      <XMarkIcon className="size-6" />
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="mb-4 p-4">
                 <label className="block text-gray-700">Caption</label>
                 <input
                   type="text"
@@ -189,26 +239,17 @@ export default function Forum() {
                   required
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Image</label>
-                <input
-                  type="file"
-                  className="w-full px-3 py-2 border rounded-lg"
-                  onChange={(e) => setImageFile(e.target.files?.[0] || null)}
-                  required
-                />
-              </div>
-              <div className="flex justify-end">
+              <div className="flex justify-end p-4">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="bg-gray-500 text-white px-4 py-2 rounded-md mr-2"
+                  className="bg-gray-400 text-white px-4 py-2 rounded-md mr-2"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                  className="bg-black text-white px-4 py-2 rounded-md"
                 >
                   Submit
                 </button>

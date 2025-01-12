@@ -20,16 +20,13 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage(""); // Clear previous error message
-    const response = await fetch(
-      "https://budaya-karya-kita-backend.vercel.app/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      }
-    );
+    const response = await fetch("https://budaya-karya-kita.vercel.app/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
     if (response.ok) {
       const data = await response.json();
@@ -38,6 +35,7 @@ export default function Login() {
       Cookies.set("loginTimestamp", loginTimestamp.toString());
       Cookies.set("userRole", data.role);
       Cookies.set("token", data.accessToken);
+      Cookies.set("id", data.id);
 
       if (data.role === "admin") {
         router.push("/admin/dashboard");
