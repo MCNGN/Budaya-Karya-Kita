@@ -80,7 +80,7 @@ export default function Header() {
             <Link
               href="/edukasi"
               className={`border-b-2 ${
-                selectedPage === "/edukasi"
+                selectedPage.startsWith("/edukasi")
                   ? "border-black font-semibold"
                   : "border-white hover:border-black hover:font-semibold"
               }`}

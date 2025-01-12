@@ -36,7 +36,7 @@ export default function Login() {
       const loginTimestamp = new Date().getTime();
       Cookies.set("isLoggedIn", "true");
       Cookies.set("loginTimestamp", loginTimestamp.toString());
-      Cookies.set("userRole", data.role); // Store user role
+      Cookies.set("userRole", data.role);
       Cookies.set("token", data.accessToken);
 
       if (data.role === "admin") {

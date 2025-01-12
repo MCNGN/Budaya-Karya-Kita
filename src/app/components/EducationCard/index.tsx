@@ -5,7 +5,7 @@ export default function EducationCard({ currentIndex, shuffledItems }) {
   const router = useRouter()
 
   return (
-    <div className="overflow-hidden w-full">
+    <div className="overflow-hidden w-full cursor-pointer">
       <div
         className="flex transition-transform duration-1000"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
