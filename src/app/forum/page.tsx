@@ -30,7 +30,7 @@ export default function Forum() {
     const fetchForumData = async () => {
       try {
         const response = await fetch(
-          "https://budaya-karya-kita.vercel.app/forum"
+          "https://budaya-karya-kita-backend.vercel.app//forum"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch forum data");
@@ -41,7 +41,7 @@ export default function Forum() {
         const updatedData = await Promise.all(
           data.map(async (post: PostData) => {
             const userResponse = await fetch(
-              `https://budaya-karya-kita.vercel.app/users/${post.user_id}`
+              `https://budaya-karya-kita-backend.vercel.app//users/${post.user_id}`
             );
             const userData = await userResponse.json();
             return {
@@ -119,7 +119,7 @@ export default function Forum() {
 
     try {
       const response = await fetch(
-        "https://budaya-karya-kita.vercel.app/forum",
+        "https://budaya-karya-kita-backend.vercel.app//forum",
         {
           method: "POST",
           headers: {

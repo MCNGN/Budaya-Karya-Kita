@@ -20,7 +20,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage(""); // Clear previous error message
-    const response = await fetch("https://budaya-karya-kita.vercel.app/login", {
+    const response = await fetch("https://budaya-karya-kita-backend.vercel.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
