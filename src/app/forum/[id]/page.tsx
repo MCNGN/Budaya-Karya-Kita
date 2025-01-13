@@ -222,7 +222,7 @@ export default function ForumDetail() {
                     <button
                       type="button"
                       className="absolute inset-y-0 right-7 flex items-center "
-                      onSubmit={handlePostComment}
+                      onClick={handlePostComment}
                       disabled={comment.length === 0}
                     >
                       <div
