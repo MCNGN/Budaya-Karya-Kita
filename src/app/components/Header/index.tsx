@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -14,6 +14,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const selectedPage = usePathname();
@@ -49,6 +50,19 @@ export default function Header() {
       Cookies.remove("loginTimestamp");
       setIsLoggedIn(false);
     }
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   return (
@@ -120,7 +134,7 @@ export default function Header() {
                 <UserCircleIcon className="size-9" />
               </button>
               {isDropdownOpen && (
-                <div className="absolute right-12 mt-9 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
+                <div ref={dropdownRef}  className="absolute right-12 mt-9 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
                   <Link
                     href="/settings"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100"

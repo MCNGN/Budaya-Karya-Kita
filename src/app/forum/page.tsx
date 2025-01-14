@@ -138,8 +138,6 @@ export default function Forum() {
       console.error("Error creating new post:", error);
     }
 
-    // Handle new post submission logic here, including sending the imageUrl to your backend
-
     closeModal();
   };
 
