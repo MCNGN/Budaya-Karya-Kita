@@ -60,11 +60,12 @@ export default function ForumDetail() {
     id: string;
     profile: string;
     comment: string;
+    username: string;
   }
 
   const [comments, setComments] = useState<CommentData[]>([]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
 
@@ -179,60 +180,71 @@ export default function ForumDetail() {
                 profile={forumData.profile}
                 caption={forumData.caption}
               />
-              <div className="relative">
-                {comments.length > 0 ? (
-                  comments.map((comment) => (
-                    <div
-                      key={comment.id}
-                      className="flex flex-row items-start px-4 w-full  mb-4 "
-                    >
-                      <div className="flex flex-row items-center">
-                        <div className="w-[30px] h-[30px] rounded-full inline-flex items-center justify-center bg-gray-500 text-gray-700 flex-shrink-0 mr-2 relative">
-                          {comment.profile && (
-                            <Image
-                              src={comment.profile}
-                              alt=""
-                              width={45}
-                              height={45}
-                              className="shadow-xl border-black rounded-full"
-                            />
-                          )}
-                        </div>
-                        <div className="break-word text-xs">
-                          {comment.comment}
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="flex w-full h-[320px] items-center justify-center">
-                    <p>No comments yet.</p>
-                  </div>
-                )}
-
-                {isLoggedIn && (
-                  <div className="absolute top-80 left-0 w-full p-4 bg-white">
-                    <input
-                      type="text"
-                      placeholder="Add a comment..."
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none"
-                      value={comment}
-                      onChange={handleInputChange}
-                    />
-                    <button
-                      type="button"
-                      className="absolute inset-y-0 right-7 flex items-center "
-                      onClick={handlePostComment}
-                      disabled={comment.length === 0}
-                    >
+              <div className="relative ">
+                <div className="h-[330px] overflow-scroll scrollbar-hidden">
+                  {comments.length > 0 ? (
+                    comments.map((comment) => (
                       <div
-                        className={` ${
-                          comment.length === 0 ? "text-gray-400" : ""
-                        }`}
+                        key={comment.id}
+                        className="flex flex-row items-start px-4 w-full mb-4 "
                       >
-                        Post
+                        <div className="flex flex-row items-center">
+                          <div className="w-[30px] h-[30px] rounded-full inline-flex items-center justify-center bg-gray-500 text-gray-700 flex-shrink-0 mr-2 relative">
+                            {comment.profile && (
+                              <Image
+                                src={comment.profile}
+                                alt=""
+                                width={45}
+                                height={45}
+                                className="shadow-xl border-black rounded-full"
+                              />
+                            )}
+                          </div>
+                          <div className="break-all text-xs">
+                            <a className="font-medium">{comment.username} </a>
+                            {comment.comment}
+                          </div>
+                        </div>
                       </div>
-                    </button>
+                    ))
+                  ) : (
+                    <div className="flex w-full h-[320px] items-center justify-center">
+                      <p>No comments yet.</p>
+                    </div>
+                  )}
+                </div>
+                {isLoggedIn && (
+                  <div
+                    className={`absolute ${
+                      comment.length > 40 ? "top-72" : "top-80"
+                    } left-0 w-full p-4`}
+                  >
+                    <div className="flex flex-row items-center border rounded-lg">
+                      <textarea
+                        placeholder="Add a comment..."
+                        className={`w-[385px] ${
+                          comment.length > 40 ? "h-max-14" : "h-[42px]"
+                        } px-3 py-2 focus:outline-none resize-none`}
+                        value={comment}
+                        onChange={handleInputChange}
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-7 flex items-center "
+                        onClick={handlePostComment}
+                        disabled={comment.length === 0}
+                      >
+                        <div
+                          className={` ${
+                            comment.length === 0
+                              ? "text-gray-400"
+                              : "hover:text-gray-400"
+                          }`}
+                        >
+                          Post
+                        </div>
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
