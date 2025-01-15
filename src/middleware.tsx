@@ -7,7 +7,17 @@ export function middleware(request: NextRequest) {
 
   const url = request.nextUrl.clone();
 
-  if (!isLoggedIn || userRole !== 'admin') {
+  if (!isLoggedIn) {
+    url.pathname = '/login';
+    return NextResponse.redirect(url);
+  }
+
+  if (url.pathname.startsWith('/admin') && userRole !== 'admin') {
+    url.pathname = '/login';
+    return NextResponse.redirect(url);
+  }
+
+  if (url.pathname.startsWith('/profile') && !isLoggedIn) {
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
@@ -16,5 +26,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/admin/:path*', // Apply middleware to all routes under /admin
+  matcher: ['/admin/:path*', '/profile'] // Apply middleware to all routes under /admin
 };

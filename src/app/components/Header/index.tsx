@@ -30,7 +30,9 @@ export default function Header() {
   const handleLogout = () => {
     Cookies.remove("isLoggedIn");
     Cookies.remove("loginTimestamp");
-    Cookies.remove("accessToken");
+    Cookies.remove("token");
+    Cookies.remove("id");
+    Cookies.remove("userRole");
     setIsLoggedIn(false);
     router.push("/");
   };
@@ -136,10 +138,10 @@ export default function Header() {
               {isDropdownOpen && (
                 <div ref={dropdownRef}  className="absolute right-12 mt-9 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
                   <Link
-                    href="/settings"
+                    href="/profile"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                   >
-                    Settings
+                    Edit Profile
                   </Link>
                   <button
                     onClick={handleLogout}
