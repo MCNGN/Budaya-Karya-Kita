@@ -15,8 +15,8 @@ interface ProfileData {
 export default function Profiel() {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   //   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [email, setEmail] = useState("aaaaaaaaaa");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("password");
 
   const id = Cookies.get("id");
   console.log(id);
@@ -24,7 +24,9 @@ export default function Profiel() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/users/${id}`); // Adjust the API endpoint as needed
+        const response = await fetch(
+          `https://budaya-karya-kita-backend.vercel.app/users/${id}`
+        ); // Adjust the API endpoint as needed
         if (!response.ok) {
           throw new Error("Failed to fetch profile data");
         }
@@ -52,7 +54,7 @@ export default function Profiel() {
           {profileData && (
             <div className="flex flex-row px-14 w-full items-center mb-4">
               <div className="w-[100px] h-[100px] rounded-full border bg-white relative mr-4 ">
-                <div className="flex w-[100px] h-[100px] rounded-full border items-center justify-center  relative overflow-hidden">
+                <div className="flex w-[100px] h-[100px] rounded-full border items-center justify-center relative overflow-hidden">
                   {profileData.profile ? (
                     <Image
                       src={profileData.profile}
@@ -99,6 +101,7 @@ export default function Profiel() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setPassword("")}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
