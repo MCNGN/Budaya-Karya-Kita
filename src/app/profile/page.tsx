@@ -25,39 +25,46 @@ export default function Profiel() {
 
   const id = Cookies.get("id");
 
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const response = await fetch(
-          `https://budaya-karya-kita-backend.vercel.app/users/${id}`
-        ); // Adjust the API endpoint as needed
-        if (!response.ok) {
-          throw new Error("Failed to fetch profile data");
-        }
-        const data = await response.json();
-        setProfileData(data);
-      } catch (error) {
-        console.log(error);
+  const fetchProfileData = async () => {
+    try {
+      const response = await fetch(
+        `https://budaya-karya-kita-backend.vercel.app/users/${id}`
+      ); // Adjust the API endpoint as needed
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile data");
       }
-    };
+      const data = await response.json();
+      setProfileData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     fetchProfileData();
   }, []);
 
   const handleUpdateProfile = async (profile: string | null) => {
     // Handle profile update logic, e.g., send data to API
-    const response = await fetch(`https://budaya-karya-kita-backend.vercel.app/users/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        profile,
-      }),
-    });
+    const response = await fetch(
+      `https://budaya-karya-kita-backend.vercel.app/users/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          profile,
+        }),
+      }
+    );
 
-    const data = await response.json();
-    console.log("Profile updated:", data);
+    if (response.ok) {
+      await fetchProfileData();
+      closeModal();
+    } else {
+      console.error("Failed to update profile");
+    }
   };
 
   const openModal = () => {
