@@ -194,9 +194,8 @@ export default function ForumDetail() {
                               <Image
                                 src={comment.profile}
                                 alt=""
-                                width={45}
-                                height={45}
-                                className="shadow-xl border-black rounded-full"
+                                fill={true}
+                                className="shadow-xl border-black rounded-full object-cover"
                               />
                             )}
                           </div>
