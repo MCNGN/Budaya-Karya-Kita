@@ -34,7 +34,7 @@ export default function Login() {
       Cookies.set("isLoggedIn", "true");
       Cookies.set("loginTimestamp", loginTimestamp.toString());
       Cookies.set("userRole", data.role);
-      Cookies.set("token", data.accessToken);
+      // Cookies.set("token", data.accessToken);
       Cookies.set("id", data.id);
 
       if (data.role === "admin") {
