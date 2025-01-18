@@ -59,7 +59,7 @@ export default function UserManagement() {
     const token = Cookies.get("token");
     try {
       const response = await fetch(
-        `htts://budaya-karya-kita-backend.vercel.app/users/${userId}`,
+        `https://budaya-karya-kita-backend.vercel.app/users/${userId}`,
         {
           method: "PUT",
           headers: {
