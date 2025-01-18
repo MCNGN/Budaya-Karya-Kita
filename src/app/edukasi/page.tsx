@@ -21,7 +21,7 @@ export default function Edukasi() {
   useEffect(() => {
     const fetchCarouselItems = async () => {
       try {
-        const response = await fetch("https://budaya-karya-kita-backend.vercel.app/educations/");
+        const response = await fetch("https://budaya-karya-kita-backend.vercel.app/educations/random");
         if (!response.ok) {
           throw new Error("Failed to fetch carousel items");
         }
