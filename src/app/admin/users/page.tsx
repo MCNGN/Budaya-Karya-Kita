@@ -57,6 +57,7 @@ export default function UserManagement() {
 
   const handleSaveClick = async (userId: string) => {
     const token = Cookies.get("token");
+    console.log(token);
     try {
       const response = await fetch(
         `https://budaya-karya-kita-backend.vercel.app/users/${userId}`,
@@ -64,6 +65,7 @@ export default function UserManagement() {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ role: selectedRole }),
         }
@@ -98,6 +100,7 @@ export default function UserManagement() {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
