@@ -41,7 +41,7 @@ export default function Login() {
       Cookies.set("id", data.id);
 
       if (data.role === "admin") {
-        router.push("/admin/dashboard");
+        router.push("/admin/");
       } else {
         router.push("/");
       }

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Sidebar from "../component/Sidebar";
+import Sidebar from "./component/Sidebar";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
@@ -46,19 +46,15 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-6 grid-rows-6 gap-4 h-full">
           <div className="bg-white row-span-2 p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold">Total User</h2>
-            <p className="mt-2">Review and manage posts.</p>
           </div>
           <div className="bg-white row-span-2 p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold">Total Posts</h2>
-            <p className="mt-2">Review and manage posts.</p>
           </div>
           <div className="bg-white row-span-2 p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold">Total Education Content</h2>
-            <p className="mt-2">Configure application settings.</p>
           </div>
           <div className="bg-white row-span-2 p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold">Total Event</h2>
-            <p className="mt-2">Configure application settings.</p>
           </div>
 
           <div className="bg-white col-span-2 row-span-6 p-4 rounded-lg shadow-md flex flex-col">
