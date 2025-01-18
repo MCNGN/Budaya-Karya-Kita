@@ -56,14 +56,18 @@ export default function UserManagement() {
   };
 
   const handleSaveClick = async (userId: string) => {
+    const token = Cookies.get("token");
     try {
-      const response = await fetch(`htts://budaya-karya-kita-backend.vercel.app/users/${userId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ role: selectedRole }),
-      });
+      const response = await fetch(
+        `htts://budaya-karya-kita-backend.vercel.app/users/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ role: selectedRole }),
+        }
+      );
 
       if (response.ok) {
         setUsers((prevUsers) =>
@@ -86,13 +90,17 @@ export default function UserManagement() {
   };
 
   const handleDelete = async (userId: string) => {
+    const token = Cookies.get("token");
     try {
-      const response = await fetch(`https://budaya-karya-kita-backend.vercel.app/users/${userId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://budaya-karya-kita-backend.vercel.app/users/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         setUsers((prevUsers) => prevUsers.filter((user) => user.id != userId));
@@ -187,7 +195,6 @@ export default function UserManagement() {
           </div>
         )}
       </div>
-      
     </div>
   );
 }

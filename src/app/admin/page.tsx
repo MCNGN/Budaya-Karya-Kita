@@ -100,46 +100,6 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
-        {/* <div className="grid grid-cols-4 gap-4 flex-grow">
-          <div className="bg-white  p-4 rounded-lg shadow-md flex flex-col">
-            <h2 className="text-xl font-semibold mb-3">Latest Comment</h2>
-            <div className="h-[450px] overflow-scroll scrollbar-hidden">
-              {comments.length > 0 ? (
-                comments.map((comment) => (
-                  <div
-                    key={comment.id}
-                    className="flex flex-row items-start w-full mb-4 "
-                  >
-                    <div className="flex flex-row items-center">
-                      <div className="w-[50px] h-[50px] rounded-full inline-flex items-center justify-center bg-gray-500 text-gray-700 flex-shrink-0 mr-2 relative">
-                        {comment.profile && (
-                          <Image
-                            src={comment.profile}
-                            alt=""
-                            fill={true}
-                            className="border-black rounded-full object-cover"
-                          />
-                        )}
-                      </div>
-                      <div className="break-all text-base">
-                        <a className="font-medium">{comment.username} </a>
-                        {comment.comment}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="flex w-full h-[450px] items-center justify-center">
-                  <p>No comments yet.</p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="bg-white  p-4 rounded-lg shadow-md flex flex-col">
-            <h2 className="text-xl font-semibold">Latest User</h2>
-            <p className="mt-2">Manage users and their permissions.</p>
-          </div>
-        </div> */}
       </div>
     </div>
   );

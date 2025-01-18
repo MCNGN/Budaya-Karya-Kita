@@ -110,6 +110,7 @@ export default function Edukasi() {
         : [...educations, savedEducation];
       setEducation(updatedEducations);
       setIsModalOpen(false);
+      fetchEducations();
     } catch (error) {
       console.error("Error saving education:", error);
     }

@@ -18,6 +18,7 @@ export default function Header() {
   const router = useRouter();
 
   const selectedPage = usePathname();
+  const role = Cookies.get("userRole");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -55,15 +56,18 @@ export default function Header() {
   }, []);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsDropdownOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -123,6 +127,18 @@ export default function Header() {
             >
               Acara
             </Link>
+            {role == "admin" && (
+              <Link
+                href="/admin"
+                className={`border-b-2 ${
+                  selectedPage === "/admin"
+                    ? "border-black font-semibold"
+                    : "border-white hover:border-black hover:font-semibold"
+                }`}
+              >
+                Dashboard
+              </Link>
+            )}
           </div>
         </div>
 
@@ -136,7 +152,10 @@ export default function Header() {
                 <UserCircleIcon className="size-9" />
               </button>
               {isDropdownOpen && (
-                <div ref={dropdownRef}  className="absolute right-12 mt-9 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
+                <div
+                  ref={dropdownRef}
+                  className="absolute right-12 mt-9 w-48 bg-white border border-gray-200 rounded-md shadow-lg"
+                >
                   <Link
                     href="/profile"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100"

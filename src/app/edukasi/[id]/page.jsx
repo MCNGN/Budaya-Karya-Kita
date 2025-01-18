@@ -48,7 +48,7 @@ export default function EdukasiDetail() {
     const fetchCultureDetail = async () => {
       try {
         const response = await fetch(
-          `https://budaya-karya-kita-backend.vercel.app/educations/random`,
+          `https://budaya-karya-kita-backend.vercel.app/education`,
           {
             method: "GET",
             headers: {
