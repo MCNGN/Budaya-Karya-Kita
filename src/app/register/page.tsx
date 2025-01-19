@@ -21,7 +21,7 @@ export default function Register() {
     e.preventDefault();
     setErrorMessage(""); // Clear previous error message
     const response = await fetch(
-      "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/register",
+      "https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/register",
       {
         method: "POST",
         headers: {

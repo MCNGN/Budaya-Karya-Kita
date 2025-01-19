@@ -21,7 +21,7 @@ export default function Login() {
     e.preventDefault();
     setErrorMessage(""); // Clear previous error message
     const response = await fetch(
-      "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/login",
+      "https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/login",
       {
         method: "POST",
         headers: {
