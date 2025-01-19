@@ -16,7 +16,7 @@ export default function Comment() {
   const fetchComments = async () => {
     const token = Cookies.get("token");
     fetch(
-      "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/comments",
+      "https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/comments",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export default function Comment() {
     const token = Cookies.get("token");
     try {
       const response = await fetch(
-        `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/comment/${commentId}`,
+        `https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/comment/${commentId}`,
         {
           method: "DELETE",
           headers: {

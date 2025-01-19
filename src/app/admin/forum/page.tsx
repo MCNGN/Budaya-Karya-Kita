@@ -15,7 +15,7 @@ export default function Forum() {
 
   const fetchForum = async () => {
     const token = Cookies.get("token");
-    fetch("http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/forum", {
+    fetch("https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/forum", {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",

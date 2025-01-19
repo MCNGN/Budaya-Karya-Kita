@@ -20,7 +20,7 @@ export default function UserManagement() {
   useEffect(() => {
     const fetchUsers = async () => {
       const token = Cookies.get("token");
-      fetch("http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users", {
+      fetch("https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users", {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -61,7 +61,7 @@ export default function UserManagement() {
     console.log(token);
     try {
       const response = await fetch(
-        `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users/${userId}`,
+        `https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -98,7 +98,7 @@ export default function UserManagement() {
     const token = Cookies.get("token");
     try {
       const response = await fetch(
-        `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users/${userId}`,
+        `https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users/${userId}`,
         {
           method: "DELETE",
           headers: {

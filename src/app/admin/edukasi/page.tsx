@@ -27,7 +27,7 @@ export default function Edukasi() {
   const fetchEducations = async () => {
     const token = Cookies.get("token");
     fetch(
-      "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations",
+      "https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -79,8 +79,8 @@ export default function Edukasi() {
   const handleSaveEducation = async (education: Education) => {
     const token = Cookies.get("token");
     const url = isEditing
-      ? `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations/${education.id}`
-      : "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations";
+      ? `https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations/${education.id}`
+      : "https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations";
     const method = isEditing ? "PUT" : "POST";
     const educationData = isEditing
       ? education
@@ -125,7 +125,7 @@ export default function Edukasi() {
     const token = Cookies.get("token");
     try {
       const response = await fetch(
-        `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations/${id}`,
+        `https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations/${id}`,
         {
           method: "DELETE",
           headers: {
