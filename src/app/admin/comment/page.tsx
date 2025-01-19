@@ -43,7 +43,7 @@ export default function Comment() {
     const token = Cookies.get("token");
     try {
       const response = await fetch(
-        `https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/comment/${commentId}`,
+        `https://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/comments/${commentId}`,
         {
           method: "DELETE",
           headers: {
