@@ -18,7 +18,12 @@ export default function Header() {
   const router = useRouter();
 
   const selectedPage = usePathname();
-  const role = Cookies.get("userRole");
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const roleFromCookie = Cookies.get('userRole');
+    setRole(roleFromCookie);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

@@ -29,13 +29,13 @@ export default function Sidebar() {
     >
       {isExpanded && (
         <div className="ml-1 w-[185px] h-[100px] relative ">
-        <Link href={"/"}>
-          <Image
-            src="/budaya-horizontal-white.png"
-            alt="logo"
-            fill={true}
-            className="object-contain"
-          />
+          <Link href={"/"}>
+            <Image
+              src="/budaya-horizontal-white.png"
+              alt="logo"
+              fill={true}
+              className="object-contain"
+            />
           </Link>
         </div>
       )}
@@ -92,20 +92,20 @@ export default function Sidebar() {
                 </Link>
               </li>
               <li className="p-3 hover:bg-gray-700 flex items-center transition-all duration-300">
-                {/* <Link href="/admin/edukasi"> */}
-                <div className="flex items-center">
-                  <ChatBubbleLeftRightIcon className={`size-6 mr-2`} />
-                  {isExpanded && <span className="ml-4">Forum</span>}
-                </div>
-                {/* </Link> */}
+                <Link href="/admin/forum">
+                  <div className="flex items-center">
+                    <ChatBubbleLeftRightIcon className={`size-6 mr-2`} />
+                    {isExpanded && <span className="ml-4">Forum</span>}
+                  </div>
+                </Link>
               </li>
               <li className="p-3 hover:bg-gray-700 flex items-center transition-all duration-300">
-                {/* <Link href="/admin/edukasi"> */}
+                <Link href="/admin/comment">
                 <div className="flex items-center">
                   <ChatBubbleOvalLeftIcon className={`size-6 mr-2`} />
                   {isExpanded && <span className="ml-4">Comment</span>}
                 </div>
-                {/* </Link> */}
+                </Link>
               </li>
               <li className="p-3 hover:bg-gray-700 flex items-center transition-all duration-300">
                 {/* <Link href="/admin/edukasi"> */}
@@ -115,7 +115,6 @@ export default function Sidebar() {
                 </div>
                 {/* </Link> */}
               </li>
-              
             </ul>
           </nav>
         </div>

@@ -41,7 +41,7 @@ export default function AdminDashboard() {
   return (
     <div className="flex flex-row h-screen overflow-hidden">
       <Sidebar />
-      <div className="p-6 flex flex-col w-full">
+      <div className="p-6 flex-1 flex-col w-full">
         <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
         <div className="grid grid-cols-6 grid-rows-6 gap-4 h-full">
           <div className="bg-white row-span-2 p-4 rounded-lg shadow-md">

@@ -26,11 +26,15 @@ export default function Edukasi() {
 
   const fetchEducations = async () => {
     const token = Cookies.get("token");
-    fetch("https://budaya-karya-kita-backend.vercel.app/educations", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           return response.json().then((error) => {
@@ -75,8 +79,8 @@ export default function Edukasi() {
   const handleSaveEducation = async (education: Education) => {
     const token = Cookies.get("token");
     const url = isEditing
-      ? `https://budaya-karya-kita-backend.vercel.app/educations/${education.id}`
-      : "https://budaya-karya-kita-backend.vercel.app/educations";
+      ? `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations/${education.id}`
+      : "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations";
     const method = isEditing ? "PUT" : "POST";
     const educationData = isEditing
       ? education
@@ -91,6 +95,7 @@ export default function Edukasi() {
       const response = await fetch(url, {
         method,
         headers: {
+          Accept: "application/json",
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
@@ -120,7 +125,7 @@ export default function Edukasi() {
     const token = Cookies.get("token");
     try {
       const response = await fetch(
-        `https://budaya-karya-kita-backend.vercel.app/educations/${id}`,
+        `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/educations/${id}`,
         {
           method: "DELETE",
           headers: {

@@ -21,11 +21,12 @@ export default function Login() {
     e.preventDefault();
     setErrorMessage(""); // Clear previous error message
     const response = await fetch(
-      "https://budaya-karya-kita-backend.vercel.app/login",
+      "http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/login",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({ email, password }),
       }

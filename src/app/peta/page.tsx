@@ -8,12 +8,13 @@ const MapComponent = dynamic(() => import("./MapComponent"), {
   ssr: false,
 });
 
-
 export default function MapPage() {
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      <Header />
-      <div className="flex flex-col justify-center items-center flex-grow">
+      <div className="z-10">
+        <Header />
+      </div>
+      <div className="flex-grow z-0">
         <MapComponent />
       </div>
     </div>

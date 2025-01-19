@@ -4,15 +4,23 @@ import Header from "../components/Header";
 const dummyEvent = [
   {
     eventName: "Festival Bangau",
+    eventLocation: "Jakarta Pusat",
+    eventDate: "20 Agustu 2025"
   },
   {
     eventName: "Event Kesenian",
+    eventLocation: "Jakarta Pusat",
+    eventDate: "20 Agustu 2025"
   },
   {
     eventName: "Festival Budaya",
+    eventLocation: "Jakarta Pusat",
+    eventDate: "20 Agustu 2025"
   },
   {
     eventName: "Pameran Batik",
+    eventLocation: "Jakarta Pusat",
+    eventDate: "20 Agustu 2025"
   },
 ];
 
@@ -28,7 +36,7 @@ export default function Event() {
         </div>
         <div className="flex flex-col sm:flex-row justify-center sm:justify-normal gap-4 mb-4 sm:gap-6">
           {dummyEvent.map((event, index) => (
-            <EventCard key={index} name={event.eventName} />
+            <EventCard key={index} name={event.eventName} location={event.eventLocation} date={event.eventDate} />
           ))}
         </div>
       </div>

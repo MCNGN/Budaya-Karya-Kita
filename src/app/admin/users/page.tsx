@@ -20,9 +20,10 @@ export default function UserManagement() {
   useEffect(() => {
     const fetchUsers = async () => {
       const token = Cookies.get("token");
-      fetch("https://budaya-karya-kita-backend.vercel.app/users", {
+      fetch("http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users", {
         headers: {
           Authorization: `Bearer ${token}`,
+          Accept: "application/json",
         },
       })
         .then((response) => {
@@ -60,12 +61,14 @@ export default function UserManagement() {
     console.log(token);
     try {
       const response = await fetch(
-        `https://budaya-karya-kita-backend.vercel.app/users/${userId}`,
+        `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users/${userId}`,
         {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+            Accept: "application/json",
+            
           },
           body: JSON.stringify({ role: selectedRole }),
         }
@@ -95,12 +98,13 @@ export default function UserManagement() {
     const token = Cookies.get("token");
     try {
       const response = await fetch(
-        `https://budaya-karya-kita-backend.vercel.app/users/${userId}`,
+        `http://budaya-karya-kita-php-33e0cba16acb.herokuapp.com/api/users/${userId}`,
         {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );
