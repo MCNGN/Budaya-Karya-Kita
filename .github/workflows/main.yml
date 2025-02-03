@@ -1,0 +1,16 @@
+name: Deploy Next.js
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # This job will run on your self-hosted runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Execute Next.js deploy script
+        run: /home/youruser/scripts/deploy-nextjs.sh
