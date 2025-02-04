@@ -73,7 +73,7 @@ export default function Login() {
             <div className="flex h-fit items-center text-white hover:text-gray-300 font-medium">
               <ArrowLeftIcon className="size-4 mr-2" />
               <div className="drop-shadow-2xl text-xl font-medium ">
-                Kembali ke Hom
+                Kembali ke Home
               </div>
             </div>
           </Link>
