@@ -1,10 +1,15 @@
 "use client";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import { useState } from "react";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  ArrowLeftIcon,
+} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 export default function Login() {
   const router = useRouter();
@@ -54,9 +59,19 @@ export default function Login() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <Header />
+      {/* <Header /> */}
       <div className="flex h-screen">
-        <div className="w-1/3 bg-red-500">a</div>
+        <div className="flex w-1/3 relative bg-gray-900">
+          <Image src="/Batik_Indonesia.jpg" alt="" fill={true} objectFit="cover" className="z-0 opacity-60"/>
+          <Link href={"/"} className="h-fit mt-6 ml-4 z-10 ">
+            <div className="flex h-fit items-center text-white hover:text-gray-300 font-medium">
+              <ArrowLeftIcon className="size-4 mr-2" />
+              <div className="drop-shadow-2xl text-xl font-medium ">
+                Kembali ke Home
+              </div>
+            </div>
+          </Link>
+        </div>
         <div className="w-2/3 bg-gray-200 flex flex-col justify-center items-center">
           <div className="w-[540px] h-[96px] text-5xl text-center font-medium">
             Selamat datang ! 👋
