@@ -62,12 +62,18 @@ export default function Login() {
       {/* <Header /> */}
       <div className="flex h-screen">
         <div className="flex w-1/3 relative bg-gray-900">
-          <Image src="/Batik_Indonesia.jpg" alt="" fill={true} objectFit="cover" className="z-0 opacity-60"/>
+          <Image
+            src="/Batik_Indonesia.jpg"
+            alt=""
+            fill={true}
+            objectFit="cover"
+            className="z-0 opacity-60"
+          />
           <Link href={"/"} className="h-fit mt-6 ml-4 z-10 ">
             <div className="flex h-fit items-center text-white hover:text-gray-300 font-medium">
               <ArrowLeftIcon className="size-4 mr-2" />
               <div className="drop-shadow-2xl text-xl font-medium ">
-                Kembali ke Home
+                Kembali ke Hom
               </div>
             </div>
           </Link>
